@@ -269,6 +269,11 @@ nav {
   color: rgb(20, 66, 152);
 }
 
+.login {
+  flex: 1;
+  text-align: right; /* Aligns Login to the extreme right */
+}
+
 /* REGISTER FORM */
 .register-form p:last-child,
 .register-form p:first-child {
@@ -376,9 +381,27 @@ footer {
 @media screen and (min-width: 700px) {
   /* body + main + checkerboard */
   body {
-    background-image: url("/images/site/checkerboard.jpg");
-    background-repeat:repeat;
-    background-size: 35em 35em;
+    background-image: url("/public/images/site/checkerboard.jpg");
+    background-size: auto;
+    background-position: center;
+    background-repeat: repeat;
+    margin: 0;
+    padding: 0;
+}
+
+/* Wrapper to keep content inside a white box */
+.wrapper {
+    max-width: 1000px; /* Adjust width as needed */
+    margin: 20px auto; /* Centers the content */
+    background-color: white; /* White background for readability */
+    padding: 20px;
+    border: 5px solid #00AEEF; /* Blue border like in the image */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* Light shadow effect */
+}
+}
+
+    
+}
   }
   #wrapper {
     background-color: white;
@@ -422,6 +445,7 @@ footer {
   }
 }
 
+
 /* laptop/desktop */
 @media screen and (min-width: 1700px) {
   #inv-display {
@@ -431,4 +455,3 @@ footer {
     width: auto;
     max-height: 25em;
   }
-}
