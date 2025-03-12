@@ -46,6 +46,7 @@ nav > ul {
   justify-content: space-around;
   padding: 1em;
 }
+
 nav {
   background-color: black;
 }
@@ -387,6 +388,9 @@ footer {
     background-repeat: repeat;
     margin: 0;
     padding: 0;
+    background-color: white; /* Ensure background color */
+    color: black; /* Ensure text color */
+    font-family: Arial, sans-serif;
 }
 
 /* Wrapper to keep content inside a white box */
@@ -398,10 +402,7 @@ footer {
     border: 5px solid #00AEEF; /* Blue border like in the image */
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* Light shadow effect */
 }
-}
 
-    
-}
   }
   #wrapper {
     background-color: white;
@@ -423,7 +424,6 @@ footer {
     flex-direction: row-reverse;
     justify-content: space-around;
   }
-}
 
 /* tablet */
 @media screen and (min-width: 1100px) {
@@ -435,16 +435,14 @@ footer {
     width: 25em;
   }
 
-  /* single car view */
-  #singleVehicleWrapper {
-    grid-template-columns: 1fr 1fr;
-  }
-  #singleVehicleWrapper img {
-    width: auto;
-    max-height: 14em;
-  }
+ /* single car view */
+#singleVehicleWrapper {
+  grid-template-columns: 1fr 1fr;
 }
-
+#singleVehicleWrapper img {
+  width: auto;
+  max-height: 14em;
+}
 
 /* laptop/desktop */
 @media screen and (min-width: 1700px) {
@@ -454,4 +452,7 @@ footer {
   #singleVehicleWrapper img {
     width: auto;
     max-height: 25em;
-  }
+  } /* ✅ Closes #singleVehicleWrapper img */
+} /* ✅ Closes @media query */
+
+/* Ensure there's no extra '}' below this line */
