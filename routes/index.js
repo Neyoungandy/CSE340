@@ -6,3 +6,7 @@ router.get('/', (req, res) => {
 });
 
 module.exports = router;
+
+router.get('/trigger-error', (req, res, next) => {
+    throw new Error("Intentional Server Error");
+});
