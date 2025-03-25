@@ -22,8 +22,3 @@ const host = process.env.HOST || 'localhost'
 /* ***********************
  * Log statement to confirm server operation
  *************************/
-app.listen(port, () => {
-  console.log(`app listening on port ${port}`)
-})
-const errorHandler = require('./middleware/errorHandler');
-app.use(errorHandler);
