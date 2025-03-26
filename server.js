@@ -17,10 +17,30 @@ const staticRoutes = require("./routes/static");
 const errorHandler = require("./middleware/errorhandler"); // Error handling middleware
 
 /* ***********************
- * Middleware & Routes
+ * View Engine Setup
  *************************/
+// ✅ Set EJS as the templating engine
+app.set("view engine", "ejs");
+
+/* ***********************
+ * Middleware & Static Files
+ *************************/
+// ✅ Serve static files (CSS, JS, Images)
+app.use(express.static("public"));
+
+// ✅ Use routes
 app.use(staticRoutes);
-app.use(errorHandler); // Apply error handling middleware
+
+// ✅ Error handling middleware
+app.use(errorHandler);
+
+/* ***********************
+ * Homepage Route
+ *************************/
+// ✅ Ensure the root ("/") route renders index.ejs
+app.get("/", (req, res) => {
+  res.render("index", { title: "Welcome to My Website" });
+});
 
 /* ***********************
  * Server Configuration
