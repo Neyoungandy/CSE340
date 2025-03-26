@@ -2,40 +2,35 @@
  * This server.js file is the primary file of the 
  * application. It is used to control the project.
  *******************************************/
+
 /* ***********************
  * Require Statements
  *************************/
-const express = require("express")
-const env = require("dotenv").config()
-const app = express()
-const static = require("./routes/static")
+const express = require("express");
+const dotenv = require("dotenv");
+
+// Load environment variables
+dotenv.config();
+
+const app = express();
+const staticRoutes = require("./routes/static");
+const errorHandler = require("./middleware/errorhandler"); // Error handling middleware
 
 /* ***********************
- * Routes
+ * Middleware & Routes
  *************************/
-app.use(static)
+app.use(staticRoutes);
+app.use(errorHandler); // Apply error handling middleware
 
 /* ***********************
- * Local Server Information
- * Values from .env (environment) file
+ * Server Configuration
  *************************/
-const port = process.env.PORT
-const host = process.env.HOST
-
-/* ***********************
- * Log statement to confirm server operation
- *************************/
-app.listen(port, () => {
-  console.log(`app listening on ${host}:${port}`)
-})
+const PORT = process.env.PORT || 3000; // Default to 3000 if PORT is not set
+const HOST = process.env.HOST || "localhost"; // Default to localhost if HOST is not set
 
 /* ***********************
  * Start Server
  *************************/
-app.listen(port, () => {
-  console.log(`app listening on ${host}:${port}`)
-})
-
-// Error handling middleware
-const errorHandler = require('./middleware/errorhandler');
-app.use(errorHandler);
+app.listen(PORT, () => {
+  console.log(`🚀 Server running at http://${HOST}:${PORT}`);
+});
