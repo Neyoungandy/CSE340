@@ -2,6 +2,7 @@
  * This server.js file is the primary file of the 
  * application. It is used to control the project.
  *******************************************/
+
 /* ***********************
  * Require Statements
  *************************/
@@ -20,10 +21,6 @@ const cookieParser = require("cookie-parser")
  * Middleware
  * ************************/
 app.use(session({
-  store: new (require('connect-pg-simple')(session))({
-    createTableIfMissing: true,
-    pool,
-  }),
   secret: process.env.SESSION_SECRET,
   resave: true,
   saveUninitialized: true,
@@ -39,13 +36,13 @@ app.use(function(req, res, next){
 
 // Use body parser
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: true }))
 
 // Use cookie parser
 app.use(cookieParser())
 
-// Use token validation
-app.use(utilities.checkJWTToken)
+// Remove JWT token validation if it's not needed
+// app.use(utilities.checkJWTToken)
 
 /* ***********************
  * View Engine and Template
@@ -63,7 +60,6 @@ app.use(require("./routes/static"))
 // inventory route
 app.use("/inv", require("./routes/inventoryRoute"))
 
-
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {
   next({
@@ -73,36 +69,30 @@ app.use(async (req, res, next) => {
 })
 
 /* ***********************
-* Express Error Handler
-* Place after all other middleware
-*************************/
+ * Express Error Handler
+ *************************/
 app.use(async (err, req, res, next) => {
-  let nav = await utilities.getNav()
   console.error(`Error at: "${req.originalUrl}": ${err.message}`)
-  if(err.status == 404) {message = err.message} else {message = 'Oops, looks like something went wrong! Maybe try a different route?'}
+  const message = err.status == 404 ? err.message : 'Oops, something went wrong! Try a different route?'
   res.render("errors/error", {
     title: err.status || 'Server Error',
     message,
-    nav,
   })
 })
 
-
 /* ***********************
  * Local Server Information
- * Values from .env (environment) file
  *************************/
-const port = process.env.PORT
-const host = process.env.HOST
+const port = process.env.PORT || 3000
+const host = process.env.HOST || 'localhost'
 
 /* ***********************
- * Log statement to confirm server operation
+ * Start Server
  *************************/
 app.listen(port, () => {
   console.log(`app listening on ${host}:${port}`)
 })
-app.listen(port, () => {
-  console.log(`app listening on port ${port}`)
-})
+
+// Error handling middleware
 const errorHandler = require('./middleware/errorhandler');
 app.use(errorHandler);
