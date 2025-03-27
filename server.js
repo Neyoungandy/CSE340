@@ -25,8 +25,12 @@ app.set("view engine", "ejs");
 /* ***********************
  * Middleware & Static Files
  *************************/
+
 // ✅ Serve static files (CSS, JS, Images)
 app.use(express.static("public"));
+
+// ✅ Serve static files (index, Images)
+app.use(express.static("views"));
 
 // ✅ Use routes
 app.use(staticRoutes);
