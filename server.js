@@ -28,22 +28,24 @@ app.set("views", path.join(__dirname, "views")); // Ensure views folder is corre
 * Middleware & Static Files
 *************************/
 
-// ✅ Serve static files (CSS, JS, Images)
-app.use(express.static(path.join(__dirname, "public"))); 
+// ✅ Serve static files (CSS, JS, Images) but disable serving index.html
+app.use(
+  express.static(path.join(__dirname, "public"), { index: false }) // 👈 Prevents auto-loading of index.html
+);
 
-// ✅ Use routes
-app.use(staticRoutes);
-
-// ✅ Error handling middleware
-app.use(errorHandler);
-
-/* ***********************
-* Homepage Route
-*************************/
 // ✅ Ensure the root ("/") route renders index.ejs
 app.get("/", (req, res) => {
   res.render("index", { title: "Welcome to My Website" });
 });
+
+// ✅ Use routes
+app.use(staticRoutes);
+
+/* ***********************
+* Error Handling Middleware
+*************************/
+// ✅ Place error handler at the end to catch errors
+app.use(errorHandler);
 
 /* ***********************
 * Server Configuration
