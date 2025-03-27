@@ -45,7 +45,7 @@ app.get("/", (req, res) => {
 /* ***********************
  * Server Configuration
  *************************/
-const PORT = process.env.PORT || 3000; // Default to 3000 if PORT is not set
+const PORT = process.env.PORT || 5500; // Default to 5500 if PORT is not set
 const HOST = process.env.HOST || "localhost"; // Default to localhost if HOST is not set
 
 /* ***********************
