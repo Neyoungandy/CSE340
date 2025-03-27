@@ -22,15 +22,15 @@ const errorHandler = require("./middleware/errorhandler"); // Error handling mid
 // ✅ Set EJS as the templating engine
 app.set("view engine", "ejs");
 
+// ✅ Set the directory for EJS views
+app.set("views", __dirname + "/views");
+
 /* ***********************
  * Middleware & Static Files
  *************************/
 
-// ✅ Serve static files (CSS, JS, Images)
+// ✅ Serve static files (CSS, JS, Images) from public folder
 app.use(express.static("public"));
-
-// ✅ Serve static files (index, Images)
-app.use(express.static("views"));
 
 // ✅ Use routes
 app.use(staticRoutes);
@@ -39,9 +39,8 @@ app.use(staticRoutes);
 app.use(errorHandler);
 
 /* ***********************
- * Homepage Route
+ * Homepage Route (Render index.ejs)
  *************************/
-// ✅ Ensure the root ("/") route renders index.ejs
 app.get("/", (req, res) => {
   res.render("index", { title: "Welcome to My Website" });
 });
@@ -50,7 +49,7 @@ app.get("/", (req, res) => {
  * Server Configuration
  *************************/
 const PORT = process.env.PORT || 5500; // Default to 5500 if PORT is not set
-const HOST = process.env.HOST || "localhost"; // Default to localhost if HOST is not set
+const HOST = process.env.HOST || "localhost"; // Default to localhost if HOST is not set;
 
 /* ***********************
  * Start Server
