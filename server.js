@@ -20,7 +20,7 @@ const errorHandler = require("./middleware/errorhandler"); // Error handling mid
 /* ***********************
 * View Engine Setup
 *************************/
-// ✅ Set EJS as the templating engine
+//  Set EJS as the templating engine
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views")); // Ensure views folder is correctly set
 
@@ -28,23 +28,23 @@ app.set("views", path.join(__dirname, "views")); // Ensure views folder is corre
 * Middleware & Static Files
 *************************/
 
-// ✅ Serve static files (CSS, JS, Images) but disable serving index.html
+//  Serve static files (CSS, JS, Images) but disable serving index.html
 app.use(
   express.static(path.join(__dirname, "public"), { index: false }) // 👈 Prevents auto-loading of index.html
 );
 
-// ✅ Ensure the root ("/") route renders index.ejs
+//  Ensure the root ("/") route renders index.ejs
 app.get("/", (req, res) => {
   res.render("index", { title: "Welcome to My Website" });
 });
 
-// ✅ Use routes
+//  Use routes
 app.use(staticRoutes);
 
 /* ***********************
 * Error Handling Middleware
 *************************/
-// ✅ Place error handler at the end to catch errors
+//  Place error handler at the end to catch errors
 app.use(errorHandler);
 
 /* ***********************

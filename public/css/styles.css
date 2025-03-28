@@ -456,3 +456,21 @@ footer {
 } /* ✅ Closes @media query */
 
 /* Ensure there's no extra '}' below this line */
+.vehicle-detail {
+  max-width: 800px;
+  margin: auto;
+  text-align: center;
+}
+
+.vehicle-detail img {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+}
+
+@media (max-width: 768px) {
+  .vehicle-detail {
+    text-align: left;
+  }
+}
+
