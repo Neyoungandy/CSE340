@@ -24,10 +24,10 @@
     <section class="gallery">
         <h2>Explore Our Sedan Collection</h2>
         <p>Find the best sedan cars available.</p>
-        <% const sedan = [ "/images/camaro.jpg" ]; %>
-        <% Sedan.forEach(car => { %>
+        <% let sedan = [ "/images/camaro.jpg" ]; %>
+        <% sedan.forEach(car => { %>
             <img src="<%= car %>" alt="Sedan" width="500">
-        <% }) %>
+        <% }); %>  <!-- Added closing tag -->
     </section>
 </body>
 </html>

@@ -24,10 +24,10 @@
     <section class="gallery">
         <h2>Explore Our Custom Collection</h2>
         <p>Find the best custom cars available.</p>
-        <% const Custom = [ "/images/adventador.jpg" ]; %>
-        <% Custom.forEach(car => { %>
-            <img src="<%= car %>" alt="custom" width="500">
-        <% }) %>
+        <% let custom = [ "/images/adventador.jpg" ]; %>
+        <% custom.forEach(car => { %>
+            <img src="<%= car %>" alt="Custom" width="500">
+        <% }); %> 
     </section>
 </body>
 </html>

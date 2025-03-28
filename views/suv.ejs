@@ -23,11 +23,11 @@
 
     <section class="gallery">
         <h2>Explore Our SUV Collection</h2>
-        <p>Find the best suv cars available.</p>
-        <% const SUV = [ "/images/survan-tn.jpg" ]; %>
-        <% SUV.forEach(car => { %>
+        <p>Find the best SUV cars available.</p>
+        <% let suv = [ "/images/survan-tn.jpg" ]; %>
+        <% suv.forEach(car => { %>
             <img src="<%= car %>" alt="SUV" width="500">
-        <% }) %>
+        <% }); %> 
     </section>
 </body>
 </html>
