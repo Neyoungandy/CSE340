@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trucks</title>
+    <title>Custom</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="icon" href="images/site/favicon-32x32.png">
 </head>
 <body>
     <header>
-        <h1>Trucks</h1>
+        <h1>Custom</h1>
         <nav>
             <ul>
                 <li><a href="/">Home</a></li>
@@ -22,8 +22,10 @@
     </header>
 
     <section class="gallery">
-        <% const trucks = [ "/images/adventador.jpg" ]; %>
-        <% trucks.forEach(car => { %>
+        <h2>Explore Our Custom Collection</h2>
+        <p>Find the best custom cars available.</p>
+        <% const Custom = [ "/images/adventador.jpg" ]; %>
+        <% custom.forEach(car => { %>
             <img src="<%= car %>" alt="Truck" width="500">
         <% }) %>
     </section>
