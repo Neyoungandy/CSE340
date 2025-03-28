@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trucks</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="images/site/favicon-32x32.png">
+</head>
+<body>
+    <header>
+        <h1>Trucks</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/custom">Custom</a></li>
+                <li><a href="/sedan">Sedan</a></li>
+                <li><a href="/suv">SUV</a></li>
+                <li><a href="/truck">Truck</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="gallery">
+        <% const trucks = [ "/images/adventador.jpg" ]; %>
+        <% trucks.forEach(car => { %>
+            <img src="<%= car %>" alt="Truck" width="500">
+        <% }) %>
+    </section>
+</body>
+</html>

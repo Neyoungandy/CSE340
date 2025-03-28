@@ -37,7 +37,21 @@ app.use(
 app.get("/", (req, res) => {
   res.render("index", { title: "Welcome to My Website" });
 });
+app.get('/custom', (req, res) => {
+  res.render('custom');
+});
 
+app.get('/sedan', (req, res) => {
+  res.render('sedan');
+});
+
+app.get('/suv', (req, res) => {
+  res.render('suv');
+});
+
+app.get('/truck', (req, res) => {
+  res.render('truck');
+});
 //  Use routes
 app.use(staticRoutes);
 
