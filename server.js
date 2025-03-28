@@ -9,6 +9,7 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const path = require("path");
+const db = require('./db'); // Import the database connection
 
 // Load environment variables
 dotenv.config();
@@ -54,6 +55,11 @@ app.get('/truck', (req, res) => {
 });
 //  Use routes
 app.use(staticRoutes);
+
+// Test database connection
+db.query('SELECT NOW()', [])
+  .then(res => console.log('Database connected at:', res.rows[0].now))
+  .catch(err => console.error('Database connection error:', err));
 
 /* ***********************
 * Error Handling Middleware
