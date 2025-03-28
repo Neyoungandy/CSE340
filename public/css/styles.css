@@ -473,4 +473,26 @@ footer {
     text-align: left;
   }
 }
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  text-align: center;
+}
+nav ul {
+  list-style: none;
+  padding: 0;
+}
+nav ul li {
+  display: inline;
+  margin: 10px;
+}
+nav ul li a {
+  text-decoration: none;
+  font-weight: bold;
+}
+.gallery img {
+  margin: 10px;
+  border-radius: 5px;
+}
 
