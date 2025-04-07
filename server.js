@@ -9,7 +9,7 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const path = require("path");
-const db = require('./db'); // Import the database connection
+const db = require('./database/db'); // Import the database connection
 
 // Load environment variables
 dotenv.config();
