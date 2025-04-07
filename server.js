@@ -21,70 +21,70 @@ const errorHandler = require("./middleware/errorhandler"); // Error handling mid
 /* ***********************
 * View Engine Setup
 *************************/
-//  Set EJS as the templating engine
+// Set EJS as the templating engine
 app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "views")); // Ensure views folder is correctly set
+app.set("views", path.join(__dirname, "views"));
 
 /* ***********************
 * Middleware & Static Files
 *************************/
-
-//  Serve static files (CSS, JS, Images) but disable serving index.html
+// Serve static files (CSS, JS, Images) but disable serving index.html
 app.use(
-  express.static(path.join(__dirname, "public"), { index: false }) // 👈 Prevents auto-loading of index.html
+  express.static(path.join(__dirname, "public"), { index: false })
 );
 
-// 404 error handler (must be last)
+/* ***********************
+* Routes
+*************************/
+// Ensure the root ("/") route renders index.ejs
+app.get("/", (req, res) => {
+  res.render("index", { title: "Welcome to My Website" });
+});
+app.get("/custom", (req, res) => {
+  res.render("custom", { title: "Custom Page" });
+});
+app.get("/sedan", (req, res) => {
+  res.render("sedan", { title: "Sedan Page" });
+});
+app.get("/suv", (req, res) => {
+  res.render("suv", { title: "SUV Page" });
+});
+app.get("/truck", (req, res) => {
+  res.render("truck", { title: "Truck Page" });
+});
+
+// Use additional route files
+app.use(staticRoutes);
+
+/* ***********************
+* 404 Error Handler
+*************************/
+// ⚠️ This must come AFTER all valid routes
 app.use((req, res) => {
   res.status(404).render("404", { title: "Page Not Found" });
 });
 
-
-//  Ensure the root ("/") route renders index.ejs
-app.get("/", (req, res) => {
-  res.render("index", { title: "Welcome to My Website" });
-});
-app.get('/custom', (req, res) => {
-  res.render('custom');
-});
-
-app.get('/sedan', (req, res) => {
-  res.render('sedan');
-});
-
-app.get('/suv', (req, res) => {
-  res.render('suv');
-});
-
-app.get('/truck', (req, res) => {
-  res.render('truck');
-});
-//  Use routes
-app.use(staticRoutes);
-
-// Test database connection
-db.query('SELECT NOW()', [])
-  .then(res => console.log('Database connected at:', res.rows[0].now))
-  .catch(err => console.error('Database connection error:', err));
-
 /* ***********************
 * Error Handling Middleware
 *************************/
-//  Place error handler at the end to catch errors
 app.use(errorHandler);
+
+/* ***********************
+* Test Database Connection
+*************************/
+db.query("SELECT NOW()", [])
+  .then(res => console.log("Database connected at:", res.rows[0].now))
+  .catch(err => console.error("Database connection error:", err));
 
 /* ***********************
 * Server Configuration
 *************************/
-const PORT = process.env.PORT || 5500; // Default to 5500 if PORT is not set
-const HOST = process.env.HOST || "0.0.0.0"; // Use 0.0.0.0 to work on Render
+const PORT = process.env.PORT || 5500;
+const HOST = process.env.HOST || "0.0.0.0";
 
 /* ***********************
 * Start Server
 *************************/
 app.listen(PORT, () => {
   console.log(`🚀 Server running at http://${HOST}:${PORT}`);
-
 });
-
-
