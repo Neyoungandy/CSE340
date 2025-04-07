@@ -24,8 +24,10 @@ const getVehicleDetails = async (req, res, next) => {
 
 // Render management page
 const showManagementPage = (req, res) => {
-    res.render('inventory/management', { message: req.flash('info') });
+    const message = req.flash("info");
+    res.render("inventory/management", { message });
 };
+
 
 // Render add classification page
 const showAddClassification = (req, res) => {
