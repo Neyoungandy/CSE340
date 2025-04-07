@@ -16,6 +16,7 @@ dotenv.config();
 
 const app = express();
 const staticRoutes = require("./routes/static");
+const inventoryRoutes = require("./routes/inventoryRoute");
 const errorHandler = require("./middleware/errorhandler"); // Error handling middleware
 
 /* ***********************
