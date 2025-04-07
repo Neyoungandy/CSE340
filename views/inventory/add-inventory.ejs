@@ -1,33 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Inventory</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        .container {
+            width: 90%;
+            margin: 20px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        ul li {
+            color: #d9534f;
+            margin: 5px 0;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            background: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+    </style>
 </head>
 <body>
-    <h1>Add New Vehicle</h1>
+    <header>
+        <h1>Add New Vehicle</h1>
+    </header>
 
-    <% if (errors.length > 0) { %>
-        <ul>
-            <% errors.forEach(error => { %>
-                <li><%= error %></li>
-            <% }) %>
-        </ul>
-    <% } %>
+    <div class="container">
+        <!-- Display Errors -->
+        <% if (errors && errors.length > 0) { %>
+            <ul>
+                <% errors.forEach(error => { %>
+                    <li><%= error %></li>
+                <% }) %>
+            </ul>
+        <% } %>
 
-    <form action="/inv/add-inventory" method="POST">
-        <label for="classification_id">Classification:</label>
-        <%= classificationList %> <!-- Dropdown menu generated from controller -->
+        <!-- Add Inventory Form -->
+        <form action="/inv/add-inventory" method="POST">
+            <!-- Classification Dropdown -->
+            <label for="classification_id">Classification:</label>
+            <%= classificationList %> <!-- Dynamically generated dropdown -->
 
-        <label for="inv_make">Make:</label>
-        <input type="text" name="inv_make" id="inv_make" required value="<%= inv_make || '' %>">
+            <!-- Make Input -->
+            <label for="inv_make">Make:</label>
+            <input 
+                type="text" 
+                name="inv_make" 
+                id="inv_make" 
+                required 
+                value="<%= inv_make || '' %>" 
+                placeholder="Enter vehicle make">
 
-        <label for="inv_model">Model:</label>
-        <input type="text" name="inv_model" id="inv_model" required value="<%= inv_model || '' %>">
+            <!-- Model Input -->
+            <label for="inv_model">Model:</label>
+            <input 
+                type="text" 
+                name="inv_model" 
+                id="inv_model" 
+                required 
+                value="<%= inv_model || '' %>" 
+                placeholder="Enter vehicle model">
 
-        <label for="inv_price">Price:</label>
-        <input type="number" name="inv_price" id="inv_price" required value="<%= inv_price || '' %>">
+            <!-- Price Input -->
+            <label for="inv_price">Price:</label>
+            <input 
+                type="number" 
+                name="inv_price" 
+                id="inv_price" 
+                required 
+                min="0" 
+                step="0.01" 
+                value="<%= inv_price || '' %>" 
+                placeholder="Enter vehicle price">
 
-        <button type="submit">Add Vehicle</button>
-    </form>
+            <!-- Miles Input -->
+            <label for="inv_miles">Mileage:</label>
+            <input 
+                type="number" 
+                name="inv_miles" 
+                id="inv_miles" 
+                required 
+                min="0" 
+                step="1" 
+                value="<%= inv_miles || '' %>" 
+                placeholder="Enter mileage">
+
+            <!-- Thumbnail Path -->
+            <label for="inv_thumbnail">Thumbnail Image Path:</label>
+            <input 
+                type="text" 
+                name="inv_thumbnail" 
+                id="inv_thumbnail" 
+                value="<%= inv_thumbnail || '' %>" 
+                placeholder="Enter thumbnail image path">
+
+            <!-- Submit Button -->
+            <button type="submit">Add Vehicle</button>
+        </form>
+    </div>
 </body>
 </html>

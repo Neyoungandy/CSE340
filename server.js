@@ -56,6 +56,9 @@ app.get("/truck", (req, res) => {
 // Use additional route files
 app.use(staticRoutes);
 
+// Inventory Routes
+app.use("/inv", inventoryRoutes);
+
 /* ***********************
 * 404 Error Handler
 *************************/

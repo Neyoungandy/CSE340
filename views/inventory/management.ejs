@@ -1,19 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inventory Management</title>
+    <style>
+        /* Basic styles for responsiveness and layout */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+        }
+        header {
+            background: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        .container {
+            width: 90%;
+            margin: auto;
+            overflow: hidden;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        ul li {
+            background: #fff;
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            text-align: center;
+        }
+        ul li a {
+            color: #333;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        ul li a:hover {
+            color: #007BFF;
+        }
+        .flash-message {
+            background: #ffeb3b;
+            color: #333;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-    <h1>Inventory Management</h1>
+    <header>
+        <h1>Inventory Management</h1>
+    </header>
 
-    <!-- Display Flash Messages -->
-    <% if (message) { %>
-        <p><%= message %></p>
-    <% } %>
+    <div class="container">
+        <!-- Display Flash Messages -->
+        <% if (message) { %>
+            <div class="flash-message"><%= message %></div>
+        <% } %>
 
-    <ul>
-        <li><a href="/inv/add-classification">Add New Classification</a></li>
-        <li><a href="/inv/add-inventory">Add New Inventory</a></li>
-    </ul>
+        <!-- Navigation Links -->
+        <ul>
+            <li><a href="/inv/add-classification">Add New Classification</a></li>
+            <li><a href="/inv/add-inventory">Add New Inventory</a></li>
+        </ul>
+    </div>
 </body>
 </html>
