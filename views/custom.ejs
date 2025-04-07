@@ -27,7 +27,11 @@
         <% let custom = [ "/images/vehicles/adventador.jpg" ]; %>
         <% custom.forEach(car => { %>
             <img src="<%= car %>" alt="Custom" width="500">
-        <% }); %> 
+            <p><strong>Mileage:</strong> 15,000 miles</p>
+            <p><strong>Price:</strong> $420,000</p>
+          </div>
+        <% }); %>
     </section>
+    <%- include('partials/footer') %>
 </body>
 </html>

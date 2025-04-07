@@ -26,8 +26,13 @@
         <p>Find the best Truck cars available.</p>
         <% let trucks = [ "/images/vehicles/fire-truck-tn.jpg" ]; %>
         <% trucks.forEach(car => { %>
-            <img src="<%= car %>" alt="Truck" width="500">
-        <% }); %> 
+            <div class="car-card">
+                <img src="<%= car %>" alt="Truck" width="500">
+                <p><strong>Mileage:</strong> 60,000 miles</p>
+                <p><strong>Price:</strong> $45,000</p>
+            </div>
+        <% }); %>
     </section>
+    <%- include('partials/footer') %>
 </body>
 </html>

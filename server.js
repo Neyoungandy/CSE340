@@ -34,6 +34,12 @@ app.use(
   express.static(path.join(__dirname, "public"), { index: false }) // 👈 Prevents auto-loading of index.html
 );
 
+// 404 error handler (must be last)
+app.use((req, res) => {
+  res.status(404).render("404", { title: "Page Not Found" });
+});
+
+
 //  Ensure the root ("/") route renders index.ejs
 app.get("/", (req, res) => {
   res.render("index", { title: "Welcome to My Website" });

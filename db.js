@@ -1,25 +1,15 @@
 const { Pool } = require("pg");
 require("dotenv").config(); // Load environment variables
 
-// Ensure all required environment variables are set
-const requiredEnvVars = ["DB_USER", "DB_HOST", "DB_NAME", "DB_PASSWORD", "DB_PORT"];
+// Use DATABASE_URL if available (common for cloud-hosted databases)
+const connectionString =
+  process.env.DATABASE_URL ||
+  `postgres://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`;
 
-requiredEnvVars.forEach((envVar) => {
-  if (!process.env[envVar]) {
-    console.warn(`⚠️ Warning: Missing environment variable ${envVar}`);
-  }
-});
-
-// Create a new PostgreSQL connection pool
+// Configure the PostgreSQL pool
 const pool = new Pool({
-  user: process.env.DB_USER,
-  host: process.env.DB_HOST,
-  database: process.env.DB_NAME,
-  password: process.env.DB_PASSWORD,
-  port: process.env.DB_PORT || 5432, // Default to 5432 if not set
-  max: 10, // Limit connections to avoid overwhelming the database
-  idleTimeoutMillis: 30000, // Close idle clients after 30s
-  connectionTimeoutMillis: 2000, // Timeout if connection takes too long
+  connectionString,
+  ssl: process.env.DATABASE_URL ? { rejectUnauthorized: false } : false, // Needed for cloud-hosted databases
 });
 
 // Event listener for successful connection
@@ -29,7 +19,8 @@ pool.on("connect", () => {
 
 // Event listener for connection errors
 pool.on("error", (err) => {
-  console.error("❌ Unexpected database connection error:", err.message);
+  console.error("❌ Database connection error:", err.message);
+  console.error("🔍 Full Error Details:", err.stack);
 });
 
 // Close the pool gracefully on exit

@@ -10,4 +10,11 @@ const getVehicleById = async (inventory_id) => {
     }
 };
 
+const pool = require('../database/db'); // Your database connection
+
+exports.addClassification = async (classification_name) => {
+    const query = `INSERT INTO classification (classification_name) VALUES ($1)`;
+    await pool.query(query, [classification_name]);
+};
+
 module.exports = { getVehicleById };

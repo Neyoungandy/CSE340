@@ -26,8 +26,13 @@
         <p>Find the best sedan cars available.</p>
         <% let sedan = [ "/images/vehicles/camaro.jpg" ]; %>
         <% sedan.forEach(car => { %>
-            <img src="<%= car %>" alt="Sedan" width="500">
-        <% }); %>  <!-- Added closing tag -->
+            <div class="car-card">
+                <img src="<%= car %>" alt="Sedan Car" width="500">
+                <p><strong>Mileage:</strong> 35,000 miles</p>
+                <p><strong>Price:</strong> $28,500</p>
+            </div>
+        <% }); %>
     </section>
+    <%- include('partials/footer') %>
 </body>
 </html>

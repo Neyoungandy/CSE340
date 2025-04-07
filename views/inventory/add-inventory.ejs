@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Add Inventory</title>
+</head>
+<body>
+    <h1>Add New Vehicle</h1>
+
+    <% if (errors.length > 0) { %>
+        <ul>
+            <% errors.forEach(error => { %>
+                <li><%= error %></li>
+            <% }) %>
+        </ul>
+    <% } %>
+
+    <form action="/inv/add-inventory" method="POST">
+        <label for="classification_id">Classification:</label>
+        <%= classificationList %> <!-- Dropdown menu generated from controller -->
+
+        <label for="inv_make">Make:</label>
+        <input type="text" name="inv_make" id="inv_make" required value="<%= inv_make || '' %>">
+
+        <label for="inv_model">Model:</label>
+        <input type="text" name="inv_model" id="inv_model" required value="<%= inv_model || '' %>">
+
+        <label for="inv_price">Price:</label>
+        <input type="number" name="inv_price" id="inv_price" required value="<%= inv_price || '' %>">
+
+        <button type="submit">Add Vehicle</button>
+    </form>
+</body>
+</html>

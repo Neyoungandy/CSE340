@@ -26,8 +26,13 @@
         <p>Find the best SUV cars available.</p>
         <% let suv = [ "/images/vehicles/survan-tn.jpg" ]; %>
         <% suv.forEach(car => { %>
-            <img src="<%= car %>" alt="SUV" width="500">
-        <% }); %> 
+            <div class="car-card">
+                <img src="<%= car %>" alt="SUV" width="500">
+                <p><strong>Mileage:</strong> 48,000 miles</p>
+                <p><strong>Price:</strong> $32,900</p>
+            </div>
+        <% }); %>
     </section>
+    <%- include('partials/footer') %>
 </body>
 </html>
