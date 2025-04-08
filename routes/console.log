@@ -1,0 +1,4 @@
+app.get("/", (req, res) => {
+    console.log("Root route accessed.");
+    res.render("index", { title: "Welcome to My Website" });
+});

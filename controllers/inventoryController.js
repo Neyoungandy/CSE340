@@ -24,8 +24,13 @@ const getVehicleDetails = async (req, res, next) => {
 
 // Render management page
 const showManagementPage = (req, res) => {
-    const message = req.flash("info");
-    res.render("inventory/management", { message });
+    try {
+        const message = req.flash("info"); // Fetch flash messages
+        res.render("inventory/management", { message });
+    } catch (error) {
+        console.error("Error rendering management view:", error);
+        res.status(500).send("Internal Server Error");
+    }
 };
 
 
