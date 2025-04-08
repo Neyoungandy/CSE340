@@ -1,3 +1,5 @@
+const db = require("../database/db"); // Import the database connection
+
 exports.buildVehicleHTML = (vehicle) => {
   // Use fallback values to ensure safe rendering
   const vehicleImage = vehicle.image || "/images/default-vehicle.png"; // Fallback for missing image
@@ -19,4 +21,15 @@ exports.buildVehicleHTML = (vehicle) => {
       <p><strong>Transmission:</strong> ${vehicleTransmission}</p>
     </div>
   `;
+};
+
+// Fetch classifications from the database
+exports.buildClassificationList = async () => {
+  try {
+    const result = await db.query("SELECT * FROM classification ORDER BY classification_name ASC");
+    return result.rows; // Return the rows as an array
+  } catch (error) {
+    console.error("Error fetching classifications:", error.message);
+    throw error; // Ensure the error propagates to the calling function
+  }
 };

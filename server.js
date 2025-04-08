@@ -20,19 +20,35 @@ const inventoryRoutes = require("./routes/inventoryRoute");
 const errorHandler = require("./middleware/errorhandler"); // Error handling middleware
 
 /* ***********************
+* Middleware Setup
+*************************/
+// Session and Flash Middleware
+const session = require("express-session");
+const flash = require("connect-flash");
+
+app.use(
+    session({
+        secret: "yourSecretKey", // Use a secure secret
+        resave: false,
+        saveUninitialized: true,
+    })
+);
+app.use(flash());
+
+// Middleware to handle JSON and form data (optional if required)
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Serve static files (CSS, JS, Images) but disable serving index.html
+app.use(express.static(path.join(__dirname, "public"), { index: false }));
+
+  /* ***********************
 * View Engine Setup
 *************************/
 // Set EJS as the templating engine
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-/* ***********************
-* Middleware & Static Files
-*************************/
-// Serve static files (CSS, JS, Images) but disable serving index.html
-app.use(
-  express.static(path.join(__dirname, "public"), { index: false })
-);
 
 /* ***********************
 * Routes
@@ -58,7 +74,7 @@ app.get("/truck", (req, res) => {
 app.use(staticRoutes);
 
 // Inventory Routes
-
+app.use("/inv", inventoryRoutes);
 
 /* ***********************
 * 404 Error Handler

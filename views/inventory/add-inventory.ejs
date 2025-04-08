@@ -77,7 +77,13 @@
         <form action="/inv/add-inventory" method="POST">
             <!-- Classification Dropdown -->
             <label for="classification_id">Classification:</label>
-            <%= classificationList %> <!-- Dynamically generated dropdown -->
+            <select name="classification_id" id="classification_id" required>
+                <% classificationList.forEach(classification => { %>
+                    <option value="<%= classification.id %>">
+                        <%= classification.name %>
+                    </option>
+                <% }) %>
+            </select>
 
             <!-- Make Input -->
             <label for="inv_make">Make:</label>
