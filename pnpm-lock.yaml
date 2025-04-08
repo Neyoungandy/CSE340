@@ -36,7 +36,7 @@ importers:
         specifier: ^1.0.1
         version: 1.0.1
       express-session:
-        specifier: ^1.17.3
+        specifier: ^1.18.1
         version: 1.18.1
       express-validator:
         specifier: ^7.2.1
