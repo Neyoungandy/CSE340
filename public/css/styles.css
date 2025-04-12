@@ -499,3 +499,89 @@ nav ul li a {
   width: 100%;
   height: 200px;
 }
+/* General Reset */
+body, html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+  background: #f4f4f9;
+  color: #333;
+}
+
+/* Container */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* Form Wrapper */
+.form-wrapper {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+}
+.form-wrapper h1 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #0056b3;
+}
+
+/* Form Fields */
+form label {
+  display: block;
+  font-weight: bold;
+  text-align: left;
+  margin: 10px 0 5px;
+}
+form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+form input:focus {
+  border-color: #0056b3;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 86, 179, 0.2);
+}
+
+/* Buttons */
+form button {
+  background: #0056b3;
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+form button:hover {
+  background: #004494;
+}
+
+/* Flash Messages */
+.notice {
+  margin: 10px 0;
+  padding: 10px;
+  background: #fce4ec;
+  color: #b71c1c;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+  color: #777;
+}

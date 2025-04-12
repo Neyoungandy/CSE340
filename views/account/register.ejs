@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="container">
+    <div class="form-wrapper">
+      <h1>Register</h1>
+      <% if (notice) { %>
+        <p class="notice"><%= notice %></p>
+      <% } %>
+      <% if (errors) { %>
+        <ul>
+          <% errors.forEach(error => { %>
+            <li class="notice"><%= error.msg %></li>
+          <% }) %>
+        </ul>
+      <% } %>
+      <form action="/account/register" method="POST">
+        <label for="account_firstname">First Name</label>
+        <input type="text" id="account_firstname" name="account_firstname" value="<%= account_firstname %>" required>
+
+        <label for="account_lastname">Last Name</label>
+        <input type="text" id="account_lastname" name="account_lastname" value="<%= account_lastname %>" required>
+
+        <label for="account_email">Email</label>
+        <input type="email" id="account_email" name="account_email" value="<%= account_email %>" required>
+
+        <label for="account_password">Password</label>
+        <input type="password" id="account_password" name="account_password" required>
+
+        <button type="submit">Register</button>
+      </form>
+      <p>Already have an account? <a href="/account/login">Login here</a></p>
+    </div>
+  </div>
+  <footer>
+    <p>&copy; CSE 340 </p>
+  </footer>
+</body>
+</html>

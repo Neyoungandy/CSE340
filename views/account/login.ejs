@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="container">
+    <div class="form-wrapper">
+      <h1>Login</h1>
+      <% if (notice) { %>
+        <p class="notice"><%= notice %></p>
+      <% } %>
+      <% if (errors) { %>
+        <ul>
+          <% errors.forEach(error => { %>
+            <li class="notice"><%= error.msg %></li>
+          <% }) %>
+        </ul>
+      <% } %>
+      <form action="/account/login" method="POST" novalidate>
+        <!-- Email Field -->
+        <label for="account_email">Email Address</label>
+        <input 
+          type="email" 
+          id="account_email" 
+          name="account_email" 
+          required 
+          value="<%= account_email %>"
+        >
+  
+        <!-- Password Field -->
+        <label for="account_password">Password</label>
+        <input 
+          type="password" 
+          id="account_password" 
+          name="account_password" 
+          required
+        >
+        
+        <!-- Show Password Button -->
+        <button type="button" id="togglePassword" aria-label="Show or Hide Password">
+          Show Password
+        </button>
+  
+        <!-- Password Requirements -->
+        <p>Passwords must be a minimum of 12 characters and include 1 capital letter, 1 number, and 1 special character.</p>
+  
+        <!-- Submit Button -->
+        <input type="submit" value="Login">
+      </form>
+      <p>Don’t have an account? <a href="/account/register">Register here</a></p>
+    </div>
+  </div>
+  <footer>
+    <p>&copy; CSE 340 </p>
+  </footer>
+  <script src="/scripts/togglePassword.js"></script>
+</body>
+</html>

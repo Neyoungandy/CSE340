@@ -23,20 +23,28 @@ const getVehicleDetails = async (req, res, next) => {
     }
 };
 
-// Render management page
-const showManagementPage = (req, res) => {
+// Render inventory management page
+const showInventoryManagementView = (req, res) => {
     try {
-        const message = req.flash("info");
-        res.render("inventory/management", { message });
+        const message = req.flash("info"); // Flash any success/failure messages
+        res.render("inventory/management", {
+            title: "Inventory Management",
+            message,
+            errors: null, // Placeholder for potential errors
+        });
     } catch (error) {
-        console.error("Error rendering management page:", error);
+        console.error("Error rendering inventory management page:", error);
         res.status(500).send("Internal Server Error");
     }
 };
 
 // Render add classification page
-const showAddClassification = (req, res) => {
-    res.render('inventory/classification', { errors: [], message: req.flash('info') });
+const showAddClassificationForm = (req, res) => {
+    res.render('inventory/classification', {
+        title: "Add Classification",
+        errors: [],
+        message: req.flash('info'),
+    });
 };
 
 // Process adding a new classification
@@ -45,6 +53,7 @@ const processAddClassification = async (req, res) => {
 
     if (!/^[a-zA-Z0-9]+$/.test(classification_name)) {
         return res.render('inventory/classification', {
+            title: "Add Classification",
             errors: ['Classification name must not contain spaces or special characters.'],
             message: req.flash('info'),
         });
@@ -54,17 +63,18 @@ const processAddClassification = async (req, res) => {
         console.log("Adding classification:", classification_name);
         await inventoryModel.addClassification(classification_name);
         req.flash('info', 'New classification added successfully!');
-        res.redirect('/inv/');
+        res.redirect('/inventory'); // Corrected route for redirection
     } catch (error) {
         console.error("Error adding classification:", error);
         res.render('inventory/classification', {
+            title: "Add Classification",
             errors: ['Database error. Please try again.'],
         });
     }
 };
 
 // Render add inventory page
-const showAddInventory = async (req, res) => {
+const showAddInventoryForm = async (req, res) => {
     try {
         console.log("Rendering Add Inventory page...");
 
@@ -74,24 +84,26 @@ const showAddInventory = async (req, res) => {
         if (!Array.isArray(classificationList) || classificationList.length === 0) {
             console.warn("No classifications found.");
             return res.render('inventory/add-inventory', {
+                title: "Add Inventory Item",
                 classificationList: [],
                 errors: ['No classifications available. Please add classifications first.'],
                 inv_make: '',
                 inv_model: '',
                 inv_price: '',
-                inv_miles: '', // Added default value
-                inv_thumbnail: '', // Added default value
+                inv_miles: '',
+                inv_thumbnail: '',
             });
         }
 
         res.render('inventory/add-inventory', {
+            title: "Add Inventory Item",
             classificationList,
             errors: [],
             inv_make: '',
             inv_model: '',
             inv_price: '',
-            inv_miles: '', // Added default value
-            inv_thumbnail: '', // Added default value
+            inv_miles: '',
+            inv_thumbnail: '',
         });
     } catch (error) {
         console.error("Error rendering Add Inventory page:", error.message);
@@ -105,6 +117,7 @@ const processAddInventory = async (req, res) => {
 
     if (!classification_id || !inv_make || !inv_model || isNaN(inv_price) || parseFloat(inv_price) <= 0 || isNaN(inv_miles) || parseInt(inv_miles) <= 0) {
         return res.render('inventory/add-inventory', {
+            title: "Add Inventory Item",
             errors: ['All fields are required. Price and mileage must be positive numbers.'],
             classificationList: await utilities.buildClassificationList(),
             inv_make,
@@ -128,10 +141,11 @@ const processAddInventory = async (req, res) => {
         });
 
         req.flash('info', 'New vehicle added successfully!');
-        res.redirect('/inv/');
+        res.redirect('/inventory'); // Corrected route for redirection
     } catch (error) {
         console.error("Error adding inventory item:", error);
         res.render('inventory/add-inventory', {
+            title: "Add Inventory Item",
             errors: ['Database error. Please try again.'],
             classificationList: await utilities.buildClassificationList(),
             inv_make,
@@ -146,9 +160,9 @@ const processAddInventory = async (req, res) => {
 // Export all controller functions
 module.exports = {
     getVehicleDetails,
-    showManagementPage,
-    showAddClassification,
+    showInventoryManagementView, // Updated naming for clarity
+    showAddClassificationForm,   // Updated naming for consistency
     processAddClassification,
-    showAddInventory,
+    showAddInventoryForm,        // Updated naming for consistency
     processAddInventory,
 };

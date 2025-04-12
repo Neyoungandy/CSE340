@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Account Management</title>
+  <link rel="stylesheet" href="/styles.css"> <!-- Optional for styling -->
+</head>
+<body>
+  <header>
+    <h1>Account Management</h1>
+  </header>
+
+  <main>
+    <% if (notice) { %>
+      <p class="notice"><%= notice %></p>
+    <% } %>
+    <% if (errors) { %>
+      <ul>
+        <% errors.forEach(error => { %>
+          <li><%= error.msg %></li>
+        <% }) %>
+      </ul>
+    <% } %>
+
+    <!-- Dynamic Greeting Based on Account Type -->
+    <h2>Welcome <%= accountData.account_firstname %></h2>
+
+    <!-- Update Account Information Link (Visible for All Clients) -->
+    <p>
+      <a href="/account/update/<%= accountData.account_id %>">Update Account Information</a>
+    </p>
+
+    <% if (accountData.account_type === "Employee" || accountData.account_type === "Admin") { %>
+      <!-- Render Inventory Management Section for Employee/Admin -->
+      <h3>Inventory Management</h3>
+      <p>
+        <a href="/inv">Access Inventory Management</a>
+      </p>
+    <% } %>
+  </main>
+
+  <footer>
+    <p>&copy; CSE 340 </p>
+  </footer>
+</body>
+</html>

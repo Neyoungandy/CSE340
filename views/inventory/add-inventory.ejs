@@ -78,11 +78,15 @@
             <!-- Classification Dropdown -->
             <label for="classification_id">Classification:</label>
             <select name="classification_id" id="classification_id" required>
-                <% classificationList.forEach(classification => { %>
-                    <option value="<%= classification.id %>">
-                        <%= classification.name %>
-                    </option>
-                <% }) %>
+                <% if (classificationList && classificationList.length > 0) { %>
+                    <% classificationList.forEach(classification => { %>
+                        <option value="<%= classification.classification_id %>">
+                            <%= classification.classification_name %>
+                        </option>
+                    <% }) %>
+                <% } else { %>
+                    <option value="">No classifications available</option>
+                <% } %>
             </select>
 
             <!-- Make Input -->

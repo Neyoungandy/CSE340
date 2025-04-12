@@ -5,52 +5,78 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inventory Management</title>
     <style>
-        /* Basic styles for responsiveness and layout */
+        /* Compact, professional styling */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             line-height: 1.6;
             background-color: #f4f4f4;
+            color: #333;
         }
         header {
-            background: #333;
+            background-color: #333;
             color: #fff;
-            padding: 10px 0;
+            padding: 15px 0;
             text-align: center;
+            font-size: 18px;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
         }
         .container {
-            width: 90%;
-            margin: auto;
-            overflow: hidden;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
         }
         ul {
             list-style: none;
             padding: 0;
         }
         ul li {
-            background: #fff;
             margin: 10px 0;
             padding: 10px;
+            background-color: #f9f9f9;
             border: 1px solid #ddd;
             border-radius: 5px;
             text-align: center;
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+        ul li:hover {
+            background-color: #e9e9e9;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
         }
         ul li a {
             color: #333;
             text-decoration: none;
             font-weight: bold;
+            font-size: 16px;
         }
         ul li a:hover {
             color: #007BFF;
         }
         .flash-message {
-            background: #ffeb3b;
+            background-color: #ffeeba;
             color: #333;
             padding: 10px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             border-radius: 5px;
             text-align: center;
+            border: 1px solid #ccc;
+        }
+        @media (max-width: 768px) {
+            header {
+                font-size: 16px;
+                padding: 10px 0;
+            }
+            .container {
+                width: 90%;
+                padding: 10px;
+            }
+            ul li a {
+                font-size: 14px;
+            }
         }
     </style>
 </head>

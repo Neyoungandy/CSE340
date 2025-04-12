@@ -10,6 +10,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const path = require("path");
 const db = require('./database/db'); // Import the database connection
+const cookieParser = require("cookie-parser")
 
 // Load environment variables
 dotenv.config();
@@ -17,11 +18,16 @@ dotenv.config();
 const app = express();
 const staticRoutes = require("./routes/static");
 const inventoryRoutes = require("./routes/inventoryRoute");
+const accountRoutes = require("./routes/accountRoute"); // Import Account Routes
+console.log("Account routes successfully imported."); // Debugging statement
 const errorHandler = require("./middleware/errorhandler"); // Error handling middleware
 
 /* ***********************
 * Middleware Setup
 *************************/
+// Cookie Parser
+app.use(cookieParser());
+
 // Session and Flash Middleware
 const session = require("express-session");
 const flash = require("connect-flash");
@@ -75,6 +81,9 @@ app.use(staticRoutes);
 
 // Inventory Routes
 app.use("/inv", inventoryRoutes);
+
+// Account Routes (handles /account/login and /account/register)
+app.use("/account", accountRoutes);
 
 /* ***********************
 * 404 Error Handler

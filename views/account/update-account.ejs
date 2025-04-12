@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/styles.css"> <!-- External stylesheet -->
+  <style>
+    /* Compact Styling for Smaller Screens */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px;
+      text-align: center;
+      font-size: 18px;
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    main {
+      max-width: 600px;
+      margin: 15px auto;
+      padding: 15px;
+      background-color: white;
+      border-radius: 6px;
+      box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    section {
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      font-size: 18px;
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      font-size: 14px;
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: #555;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    input[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      padding: 8px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 6px 8px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+      margin-bottom: 10px;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    p.notice {
+      color: #ff0000;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    p {
+      font-size: 12px;
+      color: #777;
+    }
+
+    footer {
+      text-align: center;
+      padding: 8px;
+      margin-top: 20px;
+      background-color: #f1f1f1;
+      font-size: 12px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      main {
+        max-width: 90%;
+        padding: 10px;
+      }
+
+      h2 {
+        font-size: 16px;
+      }
+
+      input[type="text"],
+      input[type="email"],
+      input[type="password"] {
+        font-size: 12px;
+        padding: 6px;
+      }
+
+      input[type="submit"],
+      button {
+        font-size: 12px;
+        padding: 6px;
+      }
+
+      label {
+        font-size: 12px;
+      }
+
+      footer {
+        font-size: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1><%= title %></h1>
+  </header>
+
+  <main>
+    <!-- Flash Messages -->
+    <% if (notice) { %>
+      <p class="notice"><%= notice %></p>
+    <% } %>
+    <% if (errors) { %>
+      <ul>
+        <% errors.forEach(error => { %>
+          <li><%= error.msg %></li>
+        <% }) %>
+      </ul>
+    <% } %>
+
+    <!-- Account Update Section -->
+    <section>
+      <h2>Update Your Information</h2>
+      <form action="/account/update" method="POST" novalidate>
+        <label for="account_firstname">First Name</label>
+        <input type="text" id="account_firstname" name="account_firstname" value="<%= account.account_firstname %>" required>
+
+        <label for="account_lastname">Last Name</label>
+        <input type="text" id="account_lastname" name="account_lastname" value="<%= account.account_lastname %>" required>
+
+        <label for="account_email">Email Address</label>
+        <input type="email" id="account_email" name="account_email" value="<%= account.account_email %>" required>
+
+        <input type="hidden" name="account_id" value="<%= account.account_id %>">
+
+        <input type="submit" value="Update">
+      </form>
+    </section>
+
+    <!-- Password Update Section -->
+    <section>
+      <h2>Change Your Password</h2>
+      <form action="/account/update-password" method="POST" novalidate>
+        <label for="new_password">New Password</label>
+        <input type="password" id="new_password" name="new_password" required>
+        <button type="button" id="togglePassword">Show Password</button>
+        <p>Passwords must be at least 12 characters long and include 1 capital letter, 1 number, and 1 special character.</p>
+
+        <input type="hidden" name="account_id" value="<%= account.account_id %>">
+
+        <input type="submit" value="Change Password">
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; CSE 340</p>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const togglePassword = document.getElementById("togglePassword");
+      const passwordField = document.getElementById("new_password");
+
+      togglePassword.addEventListener("click", function () {
+        const type = passwordField.getAttribute("type") === "password" ? "text" : "password";
+        passwordField.setAttribute("type", type);
+        this.textContent = type === "password" ? "Show Password" : "Hide Password";
+      });
+    });
+  </script>
+</body>
+</html>
