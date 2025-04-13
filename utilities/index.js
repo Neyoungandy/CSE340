@@ -6,7 +6,6 @@ require("dotenv").config(); // Load environment variables from .env
  * Utility function to build vehicle HTML
  **************************************** */
 exports.buildVehicleHTML = (vehicle) => {
-  // Use fallback values to ensure safe rendering
   const vehicleImage = vehicle.image || "/images/default-vehicle.png"; // Fallback for missing image
   const vehiclePrice = vehicle.price ? `$${parseFloat(vehicle.price).toLocaleString()}` : "Price not available";
   const vehicleMileage = vehicle.mileage ? `${parseInt(vehicle.mileage).toLocaleString()} miles` : "Mileage not available";
@@ -14,7 +13,6 @@ exports.buildVehicleHTML = (vehicle) => {
   const vehicleFuelType = vehicle.fuel_type || "Fuel type not specified";
   const vehicleTransmission = vehicle.transmission || "Transmission not specified";
 
-  // Return the HTML structure
   return `
     <div class="vehicle-detail">
       <h1>${vehicle.year || "Year not specified"} ${vehicle.make || "Make not specified"} ${vehicle.model || "Model not specified"}</h1>
@@ -49,19 +47,31 @@ exports.checkJWTToken = (req, res, next) => {
     jwt.verify(
       req.cookies.jwt, // Extract JWT from cookies
       process.env.ACCESS_TOKEN_SECRET, // Use the secret key from .env
-      function (err, accountData) {
+      function (err, decoded) {
         if (err) {
           req.flash("notice", "Please log in"); // Flash login notice
           res.clearCookie("jwt"); // Clear invalid JWT
           res.locals.loggedin = false; // Mark user as NOT logged in
           return res.redirect("/account/login"); // Redirect to login page
         }
-        res.locals.accountData = accountData; // Attach account data to response object
+
+        // Attach decoded account data to session
+        req.session.accountData = {
+          account_id: decoded.account_id,
+          account_firstname: decoded.account_firstname,
+          account_lastname: decoded.account_lastname,
+          account_email: decoded.account_email,
+          account_type: decoded.account_type,
+        };
+
+        // Attach account data to response object for use in templates
+        res.locals.accountData = req.session.accountData; // Attach to locals
         res.locals.loggedin = true; // Mark user as logged in
 
-        // Log the decoded account data to the console for debugging
-        console.log("Decoded Account Data:", res.locals.accountData);
-        
+        // Debug logs to ensure everything is working
+        console.log("Decoded Token Data:", decoded);
+        console.log("Session Data:", req.session.accountData);
+
         next(); // Proceed to the next middleware/function
       }
     );
@@ -97,32 +107,28 @@ exports.getNav = async () => {
 };
 
 /* ****************************************
- *  Check Login Middleware
+ * Check Login Middleware
  **************************************** */
 exports.checkLogin = (req, res, next) => {
   if (res.locals.loggedin) {
-    // If the user is logged in, proceed to the next middleware or route handler
-    next();
+    next(); // If the user is logged in, proceed to the next middleware or route handler
   } else {
-    // If not logged in, redirect to the login page
-    req.flash("notice", "Please log in.");
-    return res.redirect("/account/login");
+    req.flash("notice", "Please log in."); // Flash login notice
+    return res.redirect("/account/login"); // Redirect to the login page
   }
 };
 
 /* ****************************************
- *  Check Account Type Middleware
+ * Check Account Type Middleware
  **************************************** */
 exports.checkAccountType = (req, res, next) => {
   if (
     res.locals.loggedin &&
     (res.locals.accountData.account_type === "Employee" || res.locals.accountData.account_type === "Admin")
   ) {
-    // Proceed if the user has Employee or Admin account type
-    next();
+    next(); // Proceed if the user has Employee or Admin account type
   } else {
-    // Redirect to login page if unauthorized
     req.flash("notice", "You do not have permission to access this resource.");
-    return res.redirect("/account/login");
+    return res.redirect("/account/login"); // Redirect to login page if unauthorized
   }
 };

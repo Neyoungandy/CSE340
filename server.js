@@ -85,6 +85,10 @@ app.use("/inv", inventoryRoutes);
 // Account Routes (handles /account/login and /account/register)
 app.use("/account", accountRoutes);
 
+// Feedback Routes (handles /feedback form and admin view)
+const feedbackRoutes = require("./routes/feedbackRoute"); // Import feedback routes
+app.use("/feedback", feedbackRoutes); // Use feedback routes
+
 /* ***********************
 * 404 Error Handler
 *************************/

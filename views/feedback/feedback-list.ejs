@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        header { margin-bottom: 20px; }
+        ul { list-style: none; padding: 0; }
+        li { margin-bottom: 10px; }
+        strong { color: #007BFF; }
+        em { color: gray; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <header><h1>User Feedback</h1></header>
+    <main>
+        <ul>
+            <% if (feedbackList && feedbackList.length > 0) { %> <!-- Check feedbackList exists and has data -->
+                <% feedbackList.forEach(function(feedback) { %> <!-- Correct iteration syntax -->
+                    <li>
+                        <strong><%= feedback.account_firstname %> <%= feedback.account_lastname %></strong>: 
+                        <%= feedback.feedback_text %> <em>(<%= new Date(feedback.feedback_date).toLocaleString() %>)</em>
+                    </li>
+                <% }); %> <!-- Close forEach -->
+            <% } else { %> <!-- Display a message if no feedback exists -->
+                <li>No feedback available at the moment.</li>
+            <% } %>
+        </ul>
+    </main>
+</body>
+</html>
